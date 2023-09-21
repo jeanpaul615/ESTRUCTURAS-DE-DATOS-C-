@@ -10,7 +10,7 @@ private:
         Node* next;
 
         Node(const T& item) : data(item), next(nullptr) {}
-    };
+    }; 
 
     Node* front; // Puntero al frente de la lista
     Node* back;  // Puntero al final de la lista
