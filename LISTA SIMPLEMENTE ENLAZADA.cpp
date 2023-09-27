@@ -16,7 +16,6 @@ private:
         Node() { 
             data = T();  // Inicializa data con un valor por defecto de tipo T.
             next = nullptr;  // Inicializa el puntero next como nulo.
-            prev +
         }
         
         // Constructor que acepta un valor de tipo T.
@@ -216,6 +215,48 @@ public:
         }
     }
 
+void swap(unsigned int pos1, unsigned int pos2) {
+    if (pos1 == pos2 || pos1 >= sz || pos2 >= sz) {
+        // No se puede intercambiar si las posiciones son iguales o están fuera de rango.
+        return;
+    }
+
+    Node* prev1 = nullptr;
+    Node* current1 = first;
+    for (unsigned int i = 0; i < pos1; i++) {
+        prev1 = current1;
+        current1 = current1->getNext();
+    }
+
+    Node* prev2 = nullptr;
+    Node* current2 = first;
+    for (unsigned int i = 0; i < pos2; i++) {
+        prev2 = current2;
+        current2 = current2->getNext();
+    }
+
+    // Actualiza los punteros next para intercambiar los nodos
+    if (prev1) {
+        prev1->setNext(current2);
+    } else {
+        first = current2;
+    }
+
+    if (prev2) {
+        prev2->setNext(current1);
+    } else {
+        first = current1;
+    }
+
+    Node* temp = current1->getNext();
+    current1->setNext(current2->getNext());
+    current2->setNext(temp);
+  }
+`
+
+
+
+
 };
 
 
@@ -236,6 +277,7 @@ int main() {
     cout << Element;*/
     //x.insert(2,5);
     //x.remove(5);
+    x.swap(2, 4);
     x.print();
 } 
 //QUEDA FALTANDO LA FUNCION INSERTLIST();

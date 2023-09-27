@@ -53,7 +53,21 @@ public:
             delete temporal;
 
             }
+    }
 
+            // Establece el siguiente nodo.
+    void setNext(Node* n) {
+        next = n;
+    }
+
+        // Obtiene el siguiente nodo.
+    Node* getNext() { 
+        return next; 
+    }
+
+        // Obtiene el valor de data.
+    const T& getData() { 
+        return data; 
     }
     
     unsigned int size() const {
@@ -64,5 +78,23 @@ public:
     bool empty() const {
         return first == nullptr;
     }
+
+    void push(const T& elem){
+    Node *n = newNode(elem);
+        if (empty()){
+            first = n;
+            last = n;
+            sz++;
+        } else {
+            n -> setNext(first);
+            first = n;
+            sz++;
+        }
+        }
+
     }
+
 };
+
+main(){
+}
