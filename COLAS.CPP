@@ -1,100 +1,116 @@
 #include <iostream>
+using namespace std;
 
-template<typename T>
+template <typename T>
 class List {
 private:
-    // Clase interna que representa un nodo en la lista enlazada.
     class Node {
     public:
         T data;
         Node* next;
 
-        Node(const T& elem) : data(elem), next(nullptr) {}
-    }; 
+        Node(const T& value) : data(value), next(nullptr) {}
 
-    Node* front; // Puntero al frente de la lista
-    Node* back;  // Puntero al final de la lista
-
-public:
-    // Constructor por defecto de la lista.
-    List() : front(nullptr), back(nullptr) {}
-
-    // Clase interna que representa una cola en la lista enlazada.
-    class Queue {
-    private:
-        List<T> storage;
-    public:
-        // Constructor por defecto de la cola.
-        Queue() : storage() {}
-        
-    List() {
-        first = nullptr; //Constructor inicializa la lista vacia
-        last = nullptr;
-        sz = 0;
-    }
-    
-    List(const List& other) {
-        first = nullptr;
-        last = nullptr;
-        sz = 0;
-
-        Node* current = other.first;
-        while (current != nullptr) {
-            push_back(current->getData());
-            current = current->getNext();
+         void setNext(Node* n) {
+            next = n;
         }
-    }
-
-    ~List(){
-        Node* actual = first;
-        while(actual != nullptr){
-            Node* temporal = actual;
-            first = first -> getNext();
-            delete temporal;
-
-            }
-    }
-
-            // Establece el siguiente nodo.
-    void setNext(Node* n) {
-        next = n;
-    }
 
         // Obtiene el siguiente nodo.
-    Node* getNext() { 
-        return next; 
-    }
+        Node* getNext() { 
+            return next; 
+        }
 
         // Obtiene el valor de data.
-    const T& getData() { 
-        return data; 
-    }
-    
-    unsigned int size() const {
-        return sz;
-    }
-
-//verifica si la lista esta vacia
-    bool empty() const {
-        return first == nullptr;
-    }
-
-    void push(const T& elem){
-    Node *n = newNode(elem);
-        if (empty()){
-            first = n;
-            last = n;
-            sz++;
-        } else {
-            n -> setNext(first);
-            first = n;
-            sz++;
+        const T& getData() { 
+            return data; 
         }
+    };
+
+public:
+    class Queue {
+    private:
+        Node* first;  // Puntero al frente de la cola
+        Node* last;   // Puntero al final de la cola
+        unsigned int sz;
+
+    public:
+        Queue() : first(nullptr), last(nullptr) {}
+
+        ~Queue() {
+            while (!empty()) {
+                dequeue();
+            }
         }
 
+
+        void enqueue(const T& value) {
+            Node* newNode = new Node(value);
+            if (empty()) {
+                first = last = newNode;
+            } else {
+                last->next = newNode;
+                last = newNode;
+            }
+        }
+
+        void dequeue() {
+            if (!empty()) {
+                Node* temp = first
+                ;
+                first= first->next;
+                delete temp;
+                if (first== nullptr) {
+                    last = nullptr;
+                }
+            }
+        }
+
+        bool empty() const {
+            return first == nullptr;
+        }
+
+        size_t size() const {
+            size_t count = 0;
+            Node* current = first;
+            while (current != nullptr) {
+                count++;
+                current = current->next;
+            }
+            return count;
+        }
+
+        void print()const {
+        if(empty()) {
+            cout << "<>" << endl;
+        }
+         else {
+            Node* n = first;
+            cout << "<";
+            while(n != nullptr) {
+                cout << " " << n-> getData();
+                n = n->getNext();
+            }
+            cout << ">" << endl;
+        }
     }
 
+    const T& front() const {
+    if (empty()) {
+        cout << "La cola esta vacia" << endl;
+    }
+    return first->getData();
+    }
+    };
 };
 
-main(){
+int main() {
+    List <int>::Queue myQue
+    ue; 
+
+    myQueue.enqueue(1);
+    myQueue.enqueue(2);
+    myQueue.enqueue(3);
+    //const int& f = myQueue.front();
+    myQueue.print();
+    return 0;
 }
