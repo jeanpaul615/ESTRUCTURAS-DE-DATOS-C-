@@ -104,8 +104,7 @@ public:
 };
 
 int main() {
-    List <int>::Queue myQue
-    ue; 
+    List <int>::Queue myQueue; 
 
     myQueue.enqueue(1);
     myQueue.enqueue(2);
