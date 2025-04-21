@@ -1,4 +1,3 @@
-Claro, puedo ayudarte a crear un archivo `README.md` que sea atractivo y único para tu proyecto de estructuras de datos en C++. Aquí tienes una idea para estructurarlo:
 
 ---
 
